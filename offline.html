@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoldHub - Offline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(120deg, #9DC1D9 0%, #B5D3E7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #2C3E50;
+        }
+        
+        .offline-container {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(44, 62, 80, 0.15);
+        }
+        
+        .offline-icon {
+            font-size: 72px;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #2C3E50;
+        }
+        
+        p {
+            font-size: 16px;
+            color: #64748B;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .info-box {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #2C3E50;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            color: #64748B;
+        }
+        
+        .info-box li:before {
+            content: "✓ ";
+            color: #10B981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        button {
+            background: linear-gradient(120deg, #FFB84D 0%, #FFA726 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+            box-shadow: 0 4px 12px rgba(255, 184, 77, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 184, 77, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1>You're Offline</h1>
+        <p>Don't worry! Your data is safe and will sync when you're back online.</p>
+        
+        <div class="info-box">
+            <h3>What still works:</h3>
+            <ul>
+                <li>View your saved delivery address</li>
+                <li>Access your customer code</li>
+                <li>Fill out the form (saves locally)</li>
+                <li>Data syncs automatically when online</li>
+            </ul>
+        </div>
+        
+        <button onclick="window.location.href='/'">Go to Home</button>
+    </div>
+    
+    <script>
+        // Check if back online
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+        
+        // Try to reload every 5 seconds when online
+        setInterval(() => {
+            if (navigator.onLine) {
+                window.location.reload();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
+

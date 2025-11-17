@@ -1,0 +1,3244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="HoldHub - Secure package delivery service for Bushwick, Brooklyn. Ship packages to local bodegas instead of your doorstep. First package FREE!">
+    <title>HoldHub - Package Delivery Service for Bushwick</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2C3E50">
+    
+    <!-- Apple Mobile Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HoldHub">
+    <link rel="apple-touch-icon" href="icon-180.png">
+    
+    <!-- Mobile Web App -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Splash Screens for iOS -->
+    <link rel="apple-touch-startup-image" href="splash-iphone-se.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splash-iphone-8.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splash-iphone-11.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="splash-iphone-14-pro.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="splash-ipad.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <style>
+        /* ============================================
+           PREMIUM DESIGN SYSTEM - HOLDHUB
+           Optimized for Performance
+           ============================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Spacing Scale */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-5: 48px;
+            --space-6: 64px;
+            
+            /* Colors */
+            --bg-gradient-start: #9DC1D9;
+            --bg-gradient-end: #B5D3E7;
+            --card-bg: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #64748B;
+            --accent-primary: #FFB84D;
+            --accent-hover: #FFA726;
+            --success: #10B981;
+            --error: #EF4444;
+            --border-default: #E2E8F0;
+            --border-focus: #FFB84D;
+            
+            /* Typography */
+            --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            --font-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            --font-mono: 'Courier New', 'SF Mono', Monaco, monospace;
+            
+            /* Shadows */
+            --shadow-card: 0 20px 60px rgba(44, 62, 80, 0.15);
+            --shadow-card-hover: 0 25px 70px rgba(44, 62, 80, 0.2);
+            --shadow-input-focus: 0 0 0 4px rgba(255, 184, 77, 0.1);
+            --shadow-button: 0 4px 12px rgba(255, 184, 77, 0.3);
+            --shadow-button-hover: 0 6px 16px rgba(255, 184, 77, 0.4);
+            --shadow-bodega: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-bodega-hover: 0 4px 16px rgba(255, 184, 77, 0.15);
+            
+        /* Transitions */
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-fast: 0.25s ease;
+        --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: var(--font-text);
+            background: linear-gradient(120deg, #FFB84D 0%, #FFA726 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available; /* iOS Safari */
+            padding: var(--space-2);
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* Prevent pull-to-refresh on mobile */
+            overscroll-behavior-y: contain;
+            /* Prevent text selection (optional, can be removed) */
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* Allow text selection in inputs and text areas */
+        input, textarea, [contenteditable] {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 3px solid #2C3E50;
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDownBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        @keyframes shakeAttention {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-4px) rotate(-2deg); }
+            75% { transform: translateX(4px) rotate(2deg); }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes checkmarkDraw {
+            0% {
+                stroke-dashoffset: 100;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        @keyframes numberCounter {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes skeletonPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ============================================
+           HEADER - PREMIUM REDESIGN
+           ============================================ */
+        .header {
+            background: linear-gradient(120deg, #9DC1D9 0%, #B5D3E7 100%);
+            padding: var(--space-4) var(--space-4) var(--space-3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .logo {
+            font-size: 72px;
+            margin-bottom: var(--space-2);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 42px;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+            letter-spacing: -0.01em;
+        }
+
+        .subtagline {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* Trust Signals */
+        .trust-signals {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+            padding: var(--space-2) var(--space-4);
+            margin: var(--space-2) 0;
+        }
+
+        .trust-badge {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: var(--space-1) var(--space-2);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            text-align: center;
+            padding: var(--space-2);
+            font-size: 14px;
+            color: var(--text-secondary);
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+        }
+
+        .social-text {
+            display: inline-block;
+        }
+
+        /* Badge - Top Center with Orange */
+        .badge {
+            display: block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 12px auto;
+            text-align: center;
+            max-width: 90%;
+            position: relative;
+            animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1), pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .badge.new {
+            background: #FFB84D;
+            color: #2C3E50;
+        }
+
+        .badge.returning {
+            background: #FFB84D;
+            color: #2C3E50;
+        }
+
+        /* ============================================
+           FORM SECTION - PREMIUM INPUTS
+           ============================================ */
+        .form-section {
+            padding: var(--space-3) var(--space-4);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-2);
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: var(--space-1);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+            letter-spacing: -0.01em;
+        }
+
+        .required {
+            color: var(--error);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: var(--space-3);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: var(--space-3) var(--space-3) var(--space-3) 48px;
+            border: 2px solid var(--border-default);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            color: var(--text-primary);
+            background: var(--card-bg);
+            font-family: var(--font-text);
+        }
+
+        input[type="text"]:not(.has-icon),
+        input[type="email"]:not(.has-icon),
+        input[type="tel"]:not(.has-icon) {
+            padding-left: var(--space-3);
+        }
+
+        input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: var(--shadow-input-focus);
+            transform: translateY(-1px);
+        }
+
+        input.error {
+            border-color: var(--error);
+            background-color: #FEF2F2;
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+            20%, 40%, 60%, 80% { transform: translateX(4px); }
+        }
+
+        input.valid {
+            border-color: #FFB84D;
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: var(--space-3);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            pointer-events: none;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        input.valid + .validation-icon {
+            opacity: 1;
+            color: #FFB84D;
+        }
+
+        input.error + .validation-icon {
+            opacity: 1;
+            color: var(--error);
+        }
+
+        .field-error {
+            color: var(--error);
+            font-size: 13px;
+            margin-top: var(--space-1);
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        .field-help {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: var(--space-1);
+        }
+
+        /* ============================================
+           ZIP FEEDBACK - PREMIUM STYLING
+           ============================================ */
+        .zip-feedback {
+            margin-top: var(--space-1);
+            padding: var(--space-2);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .zip-feedback.success {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 1px solid var(--success);
+            display: block;
+        }
+
+        .zip-feedback.error {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid var(--error);
+            display: block;
+        }
+
+        /* ============================================
+           BODEGA CARDS - ENGAGING DESIGN
+           ============================================ */
+        .bodegas-section {
+            margin-top: var(--space-4);
+            display: none;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bodegas-section.show {
+            display: block;
+        }
+
+        .bodegas-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .bodega-card {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            border: 2px solid var(--border-default);
+            border-radius: 16px;
+            padding: var(--space-4);
+            margin-bottom: var(--space-2);
+            cursor: pointer;
+            transition: var(--transition);
+            outline: none;
+            position: relative;
+            box-shadow: var(--shadow-bodega);
+        }
+
+        .bodega-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255, 184, 77, 0.05) 0%, rgba(255, 184, 77, 0.02) 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .bodega-card:hover,
+        .bodega-card:focus {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-bodega-hover);
+        }
+
+        .bodega-card:hover::before {
+            opacity: 1;
+        }
+
+        .bodega-card.selected {
+            border-color: #FFB84D;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFEDD5 100%);
+            box-shadow: var(--shadow-bodega-hover);
+        }
+
+        .bodega-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: var(--space-2);
+            right: var(--space-2);
+            width: 28px;
+            height: 28px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            animation: checkmarkDraw 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes checkmarkDraw {
+            0% {
+                transform: scale(0) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(45deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .bodega-card:focus-visible {
+            outline: 3px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        .bodega-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .bodega-name {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .bodega-badge {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .bodega-badge.late {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(255, 184, 77, 0.3);
+        }
+
+        .bodega-badge.twentyfour-seven {
+            background: linear-gradient(135deg, #9333EA 0%, #7C3AED 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(147, 51, 234, 0.3);
+        }
+
+        .bodega-details {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .bodega-details span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .bodega-address {
+            margin-top: var(--space-1);
+            font-size: 13px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           BUTTON - PREMIUM CTA
+           ============================================ */
+        .submit-btn {
+            width: 100%;
+            padding: var(--space-4) var(--space-5);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: var(--space-4);
+            box-shadow: var(--shadow-button);
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-display);
+            letter-spacing: -0.01em;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: var(--shadow-button-hover);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            background: #CBD5E1;
+            color: #94A3B8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+            pointer-events: none;
+        }
+
+        .submit-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            border: 3px solid var(--text-primary);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           TERMS CHECKBOX - PREMIUM STYLING
+           ============================================ */
+        .terms-checkbox {
+            margin: var(--space-4) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            margin-top: 3px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-primary);
+            transition: var(--transition);
+        }
+
+        .terms-checkbox input[type="checkbox"]:checked {
+            transform: scale(1.1);
+        }
+
+        .terms-checkbox label {
+            font-size: 14px;
+            line-height: 1.6;
+            cursor: pointer;
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .terms-checkbox a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .terms-checkbox a:hover {
+            border-bottom-color: var(--accent-primary);
+        }
+
+        /* ============================================
+           BENEFITS SECTION - PREMIUM DESIGN
+           ============================================ */
+        .benefits-section {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            padding: var(--space-3) var(--space-4);
+            margin: var(--space-2) var(--space-4);
+            border-radius: 16px;
+            border: 2px solid var(--border-default);
+            box-shadow: var(--shadow-bodega);
+        }
+
+        .benefits-section h3 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            padding: var(--space-2) 0;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 15px;
+        }
+
+        .benefits-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            font-size: 20px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #D1FAE5;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           FOOTER - PREMIUM STYLING
+           ============================================ */
+        /* ============================================
+           PWA COMPONENTS
+           ============================================ */
+        
+        /* Install Button */
+        .install-button {
+            position: fixed;
+            top: 80px;
+            right: var(--space-2);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: var(--text-primary);
+            border: none;
+            padding: var(--space-2) var(--space-3);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-button);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: var(--space-1);
+            transition: var(--transition);
+            animation: slideInRight 0.3s ease;
+        }
+        
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-button-hover);
+        }
+        
+        .install-button.show {
+            display: flex;
+        }
+        
+        /* Update Notification */
+        .update-notification {
+            position: fixed;
+            bottom: var(--space-4);
+            left: var(--space-2);
+            right: var(--space-2);
+            background: white;
+            border-radius: 16px;
+            padding: var(--space-3);
+            box-shadow: var(--shadow-card);
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+            gap: var(--space-2);
+            animation: slideUp 0.3s ease;
+        }
+        
+        .update-notification.show {
+            display: flex;
+        }
+        
+        .update-notification p {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .update-notification button {
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            border: none;
+            padding: var(--space-2) var(--space-3);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Loading Screen */
+        .app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(120deg, #FFB84D 0%, #FFA726 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .app-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .app-loading .logo {
+            font-size: 96px;
+            margin-bottom: var(--space-2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .app-loading h1 {
+            font-size: 32px;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .app-loading p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .app-loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(44, 62, 80, 0.1);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: var(--space-4);
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Install Instructions */
+        .install-instructions {
+            background: #F8FAFC;
+            border-radius: 16px;
+            padding: var(--space-4);
+            margin: var(--space-4) 0;
+        }
+        
+        .install-instructions h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+        
+        .install-instructions .platform {
+            margin-bottom: var(--space-2);
+        }
+        
+        .install-instructions .platform h4 {
+            font-size: 16px;
+            margin-bottom: var(--space-1);
+            color: var(--text-primary);
+        }
+        
+        .install-instructions ol {
+            margin-left: var(--space-4);
+            color: var(--text-secondary);
+        }
+        
+        .install-instructions li {
+            margin-bottom: var(--space-1);
+            line-height: 1.6;
+        }
+        
+        /* Share Button */
+        .share-button {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            border: none;
+            padding: var(--space-2) var(--space-3);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            margin-top: var(--space-2);
+            transition: var(--transition);
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .footer {
+            background: #FFFFFF;
+            color: #2C3E50;
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .footer a {
+            color: #FFB84D;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: #FFA726;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           COPY BUTTONS - PREMIUM STYLING
+           ============================================ */
+        .copy-code-btn {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+            color: var(--text-primary);
+            padding: var(--space-2) var(--space-3);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(255, 184, 77, 0.2);
+        }
+
+        .copy-code-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 184, 77, 0.3);
+        }
+
+        .copy-code-btn.copied {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+        }
+
+        /* ============================================
+           SUCCESS SCREEN - CELEBRATION DESIGN
+           ============================================ */
+        .success-screen {
+            display: none;
+            padding: var(--space-6) var(--space-5);
+            text-align: center;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .success-screen.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: var(--space-2);
+            animation: checkmarkDraw 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.3));
+        }
+
+        .success-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.02em;
+        }
+
+        .customer-code {
+            background: #FFB84D;
+            color: #2C3E50;
+            padding: var(--space-4) var(--space-5);
+            border-radius: 16px;
+            font-size: 36px;
+            font-weight: 700;
+            margin: var(--space-5) 0;
+            letter-spacing: 3px;
+            font-family: var(--font-mono);
+            box-shadow: var(--shadow-button);
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .delivery-address-box {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            border: 2px solid var(--border-default);
+            border-radius: 16px;
+            padding: var(--space-5);
+            margin: var(--space-5) 0;
+            text-align: left;
+            font-family: var(--font-mono);
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-bodega);
+        }
+
+        .copy-btn {
+            background: var(--text-primary);
+            color: white;
+            padding: var(--space-3) var(--space-5);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: var(--space-3);
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
+        }
+
+        .copy-btn:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(44, 62, 80, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border-left: 4px solid #3B82F6;
+            padding: var(--space-5);
+            margin: var(--space-5) 0;
+            text-align: left;
+            border-radius: 12px;
+            box-shadow: var(--shadow-bodega);
+        }
+
+        .instructions h3 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .instructions ol {
+            margin-left: var(--space-4);
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border: 2px solid #F59E0B;
+            border-radius: 12px;
+            padding: var(--space-4);
+            margin: var(--space-5) 0;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+        }
+
+        .warning-box strong {
+            color: #92400E;
+            display: block;
+            margin-bottom: var(--space-1);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .warning-box p {
+            color: #92400E;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           RIPPLE EFFECT - BODEGA CARDS
+           ============================================ */
+        .bodega-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 184, 77, 0.3);
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           TOAST NOTIFICATIONS
+           ============================================ */
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-4);
+            right: var(--space-4);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            max-width: 400px;
+        }
+
+        .toast {
+            background: white;
+            border-radius: 12px;
+            padding: var(--space-3) var(--space-4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            animation: toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 300px;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--error);
+        }
+
+        .toast.info {
+            border-left: 4px solid #3B82F6;
+        }
+
+        .toast-icon {
+                font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           STAGGERED ANIMATIONS
+           ============================================ */
+        .form-section {
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+        }
+
+        .form-group {
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+        .form-group:nth-child(6) { animation-delay: 0.35s; }
+
+        .bodega-card {
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        .bodega-card:nth-child(1) { animation-delay: 0.1s; }
+        .bodega-card:nth-child(2) { animation-delay: 0.15s; }
+        .bodega-card:nth-child(3) { animation-delay: 0.2s; }
+        .bodega-card:nth-child(4) { animation-delay: 0.25s; }
+        .bodega-card:nth-child(5) { animation-delay: 0.3s; }
+
+        /* ============================================
+           LOADING STATES
+           ============================================ */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-default);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+            background-size: 200% 100%;
+            animation: skeletonPulse 1.5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+
+        /* ============================================
+           PROGRESS INDICATOR
+           ============================================ */
+        .progress-indicator {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            justify-content: center;
+        }
+
+        .progress-step {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border-default);
+            transition: var(--transition);
+        }
+
+        .progress-step.complete {
+            background: var(--success);
+            transform: scale(1.2);
+        }
+
+        .progress-step.active {
+            background: var(--accent-primary);
+            transform: scale(1.3);
+        }
+
+        /* ============================================
+           ACCESSIBILITY IMPROVEMENTS
+           ============================================ */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--text-primary);
+            color: white;
+            padding: var(--space-2);
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        input:focus-visible,
+        button:focus-visible,
+        .bodega-card:focus-visible {
+            outline: 3px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           MOBILE RESPONSIVE - PREMIUM DESIGN
+           ============================================ */
+        @media (max-width: 600px) {
+            body {
+                padding: var(--space-2);
+            }
+
+            .header {
+                padding: var(--space-5) var(--space-3);
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .logo {
+                font-size: 56px;
+            }
+
+            .form-section {
+                padding: var(--space-4);
+            }
+
+            .benefits-section {
+                margin: var(--space-3) var(--space-3);
+                padding: var(--space-4);
+            }
+
+            .bodega-card {
+                padding: var(--space-3);
+            }
+
+            .customer-code {
+                font-size: 24px;
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .success-screen {
+                padding: var(--space-5) var(--space-3);
+            }
+
+            .success-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Toast notification container -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Loading overlay -->
+    <!-- App Loading Screen -->
+    <div class="app-loading" id="appLoading">
+        <div class="logo">📦</div>
+        <h1>HoldHub</h1>
+        <p>Never Miss a Delivery Again</p>
+        <div class="spinner" aria-label="Loading"></div>
+            </div>
+    
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite">
+        <div class="loading-spinner" aria-label="Loading"></div>
+        </div>
+
+    <!-- Install Button -->
+    <button class="install-button" id="installButton" aria-label="Install HoldHub app">
+        📱 Install App
+    </button>
+    
+    <!-- Update Notification -->
+    <div class="update-notification" id="updateNotification">
+        <p>🔄 New version available!</p>
+        <button onclick="window.location.reload()">Update Now</button>
+        </div>
+
+    <div class="container" id="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo" id="logo" title="Click me 5 times for a surprise!">📦</div>
+            <h1>HoldHub</h1>
+            <p class="tagline">Never Miss a Delivery Again</p>
+            <p class="subtagline">Because your lobby is a danger zone 📦</p>
+        </div>
+
+        <!-- Badge - Top Center -->
+        <div id="badge" class="badge new">🎉 FIRST PACKAGE FREE!</div>
+
+        <!-- Trust Signals -->
+        <div class="trust-signals">
+            <div class="trust-badge">🔒 Secure & Private</div>
+            <div class="trust-badge">✓ 500+ Happy Customers</div>
+            <div class="trust-badge">⭐ 4.9/5 Rating</div>
+        </div>
+        
+        <!-- Social Proof -->
+        <div class="social-proof" id="socialProof">
+            <span class="social-text">💬 <span id="signupCount">127</span> people signed up this week</span>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <h3>Why HoldHub?</h3>
+            <ul class="benefits-list">
+                <li>No more stolen packages from your doorstep</li>
+                <li>No missed deliveries - bodegas are always open</li>
+                <li>Convenient pickup at your local bodega</li>
+                <li>Secure package storage until you're ready</li>
+            </ul>
+        </div>
+
+        <!-- Form Section -->
+        <div id="formSection" class="form-section">
+        <form id="signupForm">
+                <div class="form-group">
+                    <label for="name">Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required aria-required="true" aria-describedby="nameError nameHelp" autocomplete="name">
+                    <div class="field-error" id="nameError" role="alert" aria-live="polite">Please enter your full name</div>
+                    <div class="sr-only" id="nameHelp">Enter your full name as it appears on your ID</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">📧</span>
+                        <input type="email" id="email" name="email" class="has-icon" placeholder="john@example.com" required aria-required="true" aria-describedby="emailError emailHelp" autocomplete="email">
+                        <span class="validation-icon" aria-hidden="true"></span>
+                    </div>
+                    <div class="field-error" id="emailError" role="alert" aria-live="polite">Please enter a valid email address</div>
+                    <div class="field-help" id="emailHelp">We'll send package notifications to this email</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">📱</span>
+                        <input type="tel" id="phone" name="phone" class="has-icon" placeholder="(555) 123-4567" required aria-required="true" maxlength="14" aria-describedby="phoneError phoneHelp" autocomplete="tel">
+                        <span class="validation-icon" aria-hidden="true"></span>
+                    </div>
+                    <div class="field-error" id="phoneError" role="alert" aria-live="polite">Please enter a valid phone number</div>
+                    <div class="field-help" id="phoneHelp">We'll text you when your package arrives</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="street">Street Address <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <span class="input-icon" aria-hidden="true">📍</span>
+                        <input type="text" id="street" name="street" class="has-icon" placeholder="123 Main Street" required aria-required="true" aria-describedby="streetError" autocomplete="street-address">
+                        <span class="validation-icon" aria-hidden="true"></span>
+                    </div>
+                    <div class="field-error" id="streetError" role="alert" aria-live="polite">Please enter your street address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apartment">Apartment/Unit</label>
+                    <input type="text" id="apartment" name="apartment" placeholder="Apt 4B, Unit 2, Penthouse 😎 (optional)">
+                    <div class="field-help">Optional - for our records only</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="zip">Zip Code <span class="required">*</span></label>
+                    <input type="text" id="zip" name="zip" placeholder="11221" required maxlength="5" pattern="[0-9]{5}" aria-required="true">
+                    <div id="zipFeedback" class="zip-feedback"></div>
+                    <div class="field-error" id="zipError">We currently only serve zip code 11221</div>
+                </div>
+
+                <!-- Bodegas Section -->
+                <div id="bodegasSection" class="bodegas-section">
+                    <h3 class="bodegas-title">Select Your Bodega:</h3>
+                    
+                    <div class="bodega-card" data-bodega="ahmeds" data-description="The original! 🏆 Ahmed has the best smile">
+                        <div class="bodega-header">
+                            <div class="bodega-name">Ahmed's Deli & Grocery</div>
+                            <span class="bodega-badge late">OPEN LATE</span>
+                </div>
+                        <div class="bodega-details">
+                            <span>📍 Bushwick Ave</span>
+                            <span>📏 0.2 mi</span>
+                            <span>🕐 6am-11pm</span>
+                        </div>
+                        <div class="bodega-personality" style="display: none;">The original! 🏆 Ahmed has the best smile</div>
+                        <div class="bodega-address" style="display: none;">456 Bushwick Ave, Brooklyn, NY 11221</div>
+            </div>
+
+                    <div class="bodega-card" data-bodega="marias" data-description="Family-owned for 20 years ❤️">
+                        <div class="bodega-header">
+                            <div class="bodega-name">Maria's Corner Store</div>
+                            <span class="bodega-badge late">OPEN LATE</span>
+                        </div>
+                        <div class="bodega-details">
+                            <span>📍 Wilson Ave</span>
+                            <span>📏 0.3 mi</span>
+                            <span>🕐 7am-12am</span>
+                        </div>
+                        <div class="bodega-personality" style="display: none;">Family-owned for 20 years ❤️</div>
+                        <div class="bodega-address" style="display: none;">789 Wilson Ave, Brooklyn, NY 11221</div>
+                    </div>
+
+                    <div class="bodega-card" data-bodega="best" data-description="Never closes! Literally. Never. 24/7 🌙">
+                        <div class="bodega-header">
+                            <div class="bodega-name">Best Grocery & Deli</div>
+                            <span class="bodega-badge twentyfour-seven">OPEN 24/7</span>
+                        </div>
+                        <div class="bodega-details">
+                            <span>📍 Knickerbocker Ave</span>
+                            <span>📏 0.4 mi</span>
+                            <span>🕐 24/7</span>
+                        </div>
+                        <div class="bodega-personality" style="display: none;">Never closes! Literally. Never. 24/7 🌙</div>
+                        <div class="bodega-address" style="display: none;">321 Knickerbocker Ave, Brooklyn, NY 11221</div>
+            </div>
+
+                    <div class="bodega-card" data-bodega="sunrise" data-description="Fresh coffee every morning ☕">
+                        <div class="bodega-header">
+                            <div class="bodega-name">Sunrise Deli</div>
+                            <span class="bodega-badge late">OPEN LATE</span>
+                        </div>
+                        <div class="bodega-details">
+                            <span>📍 Broadway</span>
+                            <span>📏 0.5 mi</span>
+                            <span>🕐 6am-11pm</span>
+                        </div>
+                        <div class="bodega-personality" style="display: none;">Fresh coffee every morning ☕</div>
+                        <div class="bodega-address" style="display: none;">567 Broadway, Brooklyn, NY 11221</div>
+            </div>
+
+                    <div class="bodega-card" data-bodega="quickstop" data-description="Speedy service, friendly faces 😊">
+                        <div class="bodega-header">
+                            <div class="bodega-name">Quick Stop Bodega</div>
+                        </div>
+                        <div class="bodega-details">
+                            <span>📍 Myrtle Ave</span>
+                            <span>📏 0.6 mi</span>
+                            <span>🕐 7am-10pm</span>
+                        </div>
+                        <div class="bodega-personality" style="display: none;">Speedy service, friendly faces 😊</div>
+                        <div class="bodega-address" style="display: none;">234 Myrtle Ave, Brooklyn, NY 11221</div>
+                    </div>
+                </div>
+
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                    <label for="terms">
+                        I agree to the <a href="#" onclick="alert('Terms of Service: HoldHub provides package delivery services. Customers are responsible for including their customer code in delivery addresses. HoldHub is not liable for lost or damaged packages. Bodegas reserve the right to refuse packages without proper codes.'); return false;">Terms of Service</a> and <a href="#" onclick="alert('Privacy Policy: We collect your name, email, phone, and address to provide delivery services. We share your delivery address with selected bodegas. We do not sell your data to third parties.'); return false;">Privacy Policy</a> <span class="required">*</span>
+                    </label>
+                </div>
+                <div class="field-error" id="termsError">You must agree to the terms to continue</div>
+
+                <button type="submit" id="submitBtn" class="submit-btn" disabled>
+                    <span class="btn-text">Get My Free Delivery Address →</span>
+            </button>
+        </form>
+        </div>
+
+        <!-- Install Instructions -->
+        <div class="install-instructions" id="installInstructions" style="display: none;">
+            <h3>📱 How to Install HoldHub</h3>
+            
+            <div class="platform">
+                <h4>iPhone (Safari):</h4>
+                <ol>
+                    <li>Open HoldHub in Safari</li>
+                    <li>Tap the Share button (square with arrow)</li>
+                    <li>Scroll down and tap "Add to Home Screen"</li>
+                    <li>Tap "Add"</li>
+                </ol>
+            </div>
+
+            <div class="platform">
+                <h4>Android (Chrome):</h4>
+                <ol>
+                    <li>Open HoldHub in Chrome</li>
+                    <li>Tap the menu (3 dots) in the top right</li>
+                    <li>Tap "Install app" or "Add to Home Screen"</li>
+                    <li>Tap "Install"</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin-bottom: 16px;">
+                Questions? Email us at <a href="mailto:holdhub00@gmail.com">📧 holdhub00@gmail.com</a>
+            </p>
+            <p style="font-size: 14px; color: #2C3E50;">
+                © 2025 HoldHub
+            </p>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="successScreen" class="success-screen">
+            <div class="success-icon">✅</div>
+            <h2 class="success-title" id="successTitle">Welcome to HoldHub!</h2>
+            <p style="color: #2C3E50; margin-bottom: 20px;">Your customer code:</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <div id="customerCodeDisplay" class="customer-code" style="margin: 0;">HH-000000</div>
+                <button class="copy-code-btn" id="copyCodeBtn">Copy Code</button>
+            </div>
+            
+            <button class="share-button" id="shareButton" style="display: none;">
+                📤 Share HoldHub
+            </button>
+            
+            <div class="delivery-address-box" id="deliveryAddress">
+                <!-- Address will be inserted here -->
+            </div>
+            
+            <button class="copy-btn" id="copyBtn">Copy Address</button>
+            
+            <div class="instructions">
+                <h3>How to Use HoldHub:</h3>
+                <ol>
+                    <li>When ordering online, use the delivery address shown above</li>
+                    <li>Make sure to include your customer code (HH-####) in the address</li>
+                    <li>You'll receive a text when your package arrives at the bodega</li>
+                    <li>Pick up your package during the bodega's business hours</li>
+                    <li>Show your ID and customer code when picking up</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong>
+                <p>You MUST include your customer code (HH-####) in the delivery address. Bodegas only accept packages with HoldHub codes. Without the code, your package will be refused.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+           HOLDHUB - MODULAR ARCHITECTURE
+           Performance-optimized, analytics-ready, future-proof
+           Version: 1.0.0
+           ============================================ */
+        
+        'use strict';
+        
+        // ============================================
+        // CONFIGURATION & ENVIRONMENT
+        // ============================================
+        const HoldHub = {
+            version: { major: 1, minor: 0, patch: 0, string: '1.0.0' },
+            env: {
+                isDevelopment: true,
+                isProduction: false,
+                debugMode: true
+            },
+            config: {
+                apiEndpoint: '',
+                debounceDelay: 300,
+                validationDebounce: 500
+            },
+            
+            // ============================================
+            // PERFORMANCE: CACHED DOM ELEMENTS
+            // ============================================
+            $: {
+                container: null,
+                form: null,
+                submitBtn: null,
+                nameInput: null,
+                emailInput: null,
+                phoneInput: null,
+                streetInput: null,
+                zipInput: null,
+                termsCheckbox: null,
+                bodegasSection: null,
+                successScreen: null
+            },
+            
+            // ============================================
+            // STATE MANAGEMENT
+            // ============================================
+            state: {
+                currentStep: 1,
+                formData: {},
+                selectedBodega: null,
+                isReturning: false,
+                customerCode: null,
+                validationErrors: {},
+                startTime: null,
+                fieldStartTimes: {}
+            },
+            
+            // ============================================
+            // UTILITIES
+            // ============================================
+            utils: {
+                // Debounce for performance
+                debounce(func, wait) {
+                    let timeout;
+                    return function executedFunction(...args) {
+                        const later = () => {
+                            clearTimeout(timeout);
+                            func(...args);
+                        };
+                        clearTimeout(timeout);
+                        timeout = setTimeout(later, wait);
+                    };
+                },
+                
+                // Throttle for scroll/resize
+                throttle(func, limit) {
+                    let inThrottle;
+                    return function(...args) {
+                        if (!inThrottle) {
+                            func.apply(this, args);
+                            inThrottle = true;
+                            setTimeout(() => inThrottle = false, limit);
+                        }
+                    };
+                },
+                
+                // Request animation frame wrapper
+                raf(callback) {
+                    return requestAnimationFrame(callback);
+                },
+                
+                // Get time-based greeting
+                getTimeGreeting() {
+                    const hour = new Date().getHours();
+                    if (hour >= 6 && hour < 12) return { text: 'Good morning! ☀️', emoji: '☀️' };
+                    if (hour >= 12 && hour < 17) return { text: 'Great choice! 👍', emoji: '👍' };
+                    if (hour >= 17 && hour < 22) return { text: 'Evening delivery warrior! 🌙', emoji: '🌙' };
+                    return { text: 'Night owl package planning! 🦉', emoji: '🦉' };
+                },
+                
+                // Random loading message
+                getLoadingMessage() {
+                    const messages = [
+                        'Finding the coziest bodega...',
+                        'Calculating optimal package route...',
+                        'Securing your delivery fortress...',
+                        'Consulting with bodega cats...',
+                        'Measuring walking distance...'
+                    ];
+                    return messages[Math.floor(Math.random() * messages.length)];
+                },
+                
+                // Random compliment
+                getCompliment() {
+                    const compliments = [
+                        'Excellent choice! 👌',
+                        'Perfect! This one\'s popular 🌟',
+                        'Great pick! 2 minutes away 🚶‍♂️',
+                        'Smart! They\'re open late 🕐'
+                    ];
+                    return compliments[Math.floor(Math.random() * compliments.length)];
+                },
+                
+                // Generate unique customer code
+                generateUniqueCustomerCode() {
+                    // Combine timestamp with random for true uniqueness
+                    // Format: HH-XXXXXX (6 digits)
+                    const now = Date.now();
+                    const random = Math.floor(Math.random() * 1000);
+                    
+                    // Take last 5 digits of timestamp + 1 random digit
+                    const timeComponent = now.toString().slice(-5);
+                    const randomComponent = random.toString().charAt(0);
+                    
+                    const code = `HH-${timeComponent}${randomComponent}`;
+                    
+                    // Also check localStorage to prevent duplicates on same device
+                    const usedCodes = JSON.parse(localStorage.getItem('holdhub_used_codes') || '[]');
+                    
+                    // If somehow duplicate (nearly impossible), regenerate
+                    if (usedCodes.includes(code)) {
+                        return this.generateUniqueCustomerCode(); // Recursive call
+                    }
+                    
+                    // Store this code
+                    usedCodes.push(code);
+                    localStorage.setItem('holdhub_used_codes', JSON.stringify(usedCodes));
+                    
+                    return code;
+                }
+            },
+            
+            // ============================================
+            // ANALYTICS SYSTEM
+            // ============================================
+            analytics: {
+                events: [],
+                
+                track(event, data = {}) {
+                    const eventData = {
+                        event,
+                        timestamp: new Date().toISOString(),
+                        ...data,
+                        device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                        browser: this.getBrowser(),
+                        timeOnPage: HoldHub.state.startTime ? Math.floor((Date.now() - HoldHub.state.startTime) / 1000) : 0
+                    };
+                    
+                    this.events.push(eventData);
+                    
+                    // Console logging for development
+                    if (HoldHub.env.debugMode) {
+                        console.group(`📊 Analytics: ${event}`);
+                        console.log('Data:', eventData);
+                        console.groupEnd();
+                    }
+                    
+                    // Store in localStorage for batch sending
+                    this.saveToStorage(eventData);
+                    
+                    // Future: Send to Google Analytics, Mixpanel, etc.
+                    // this.sendToGA(event, eventData);
+                },
+                
+                getBrowser() {
+                    const ua = navigator.userAgent;
+                    if (ua.includes('Chrome')) return 'Chrome';
+                    if (ua.includes('Firefox')) return 'Firefox';
+                    if (ua.includes('Safari')) return 'Safari';
+                    if (ua.includes('Edge')) return 'Edge';
+                    return 'Other';
+                },
+                
+                saveToStorage(eventData) {
+                    try {
+                        const stored = localStorage.getItem('holdhub_analytics');
+                        const events = stored ? JSON.parse(stored) : [];
+                        events.push(eventData);
+                        // Keep last 100 events
+                        if (events.length > 100) events.shift();
+                        localStorage.setItem('holdhub_analytics', JSON.stringify(events));
+                    } catch (e) {
+                        console.warn('Analytics storage failed:', e);
+                    }
+                },
+                
+                trackConversion() {
+                    this.track('signup_success', {
+                        customerCode: HoldHub.state.customerCode,
+                        bodega: HoldHub.state.selectedBodega,
+                        returning: HoldHub.state.isReturning,
+                        timeToComplete: HoldHub.state.startTime ? Math.floor((Date.now() - HoldHub.state.startTime) / 1000) : 0
+                    });
+                },
+                
+                trackError(field, error) {
+                    this.track('validation_error', { field, error });
+                }
+            },
+            
+            // ============================================
+            // UI MANAGEMENT
+            // ============================================
+            ui: {
+                showToast(message, type = 'info', duration = 4000) {
+                    const container = document.getElementById('toastContainer');
+                    if (!container) return;
+                    
+                    const toast = document.createElement('div');
+                    toast.className = `toast ${type}`;
+                    toast.setAttribute('role', 'alert');
+                    
+                    const icons = { success: '✓', error: '✗', info: 'ℹ' };
+                    
+                    toast.innerHTML = `
+                        <span class="toast-icon" aria-hidden="true">${icons[type] || icons.info}</span>
+                        <span class="toast-message">${message}</span>
+                        <button class="toast-close" aria-label="Close notification" onclick="this.parentElement.remove()">×</button>
+                    `;
+                    
+                    container.appendChild(toast);
+                    
+                    setTimeout(() => {
+                        toast.style.animation = 'toastSlideIn 0.3s reverse';
+                        setTimeout(() => toast.remove(), 300);
+                    }, duration);
+                },
+                
+                showLoading(message = '') {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        overlay.classList.add('active');
+                        if (message) {
+                            const spinner = overlay.querySelector('.loading-spinner');
+                            if (spinner && !spinner.nextElementSibling) {
+                                const msg = document.createElement('div');
+                                msg.textContent = message;
+                                msg.style.marginTop = '16px';
+                                msg.style.color = 'var(--text-primary)';
+                                overlay.appendChild(msg);
+                            }
+                        }
+                    }
+                },
+                
+                hideLoading() {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                        const msg = overlay.querySelector('div:not(.loading-spinner)');
+                        if (msg) msg.remove();
+                    }
+                },
+                
+                createRipple(event) {
+                    const button = event.currentTarget;
+                    const circle = document.createElement('span');
+                    const diameter = Math.max(button.clientWidth, button.clientHeight);
+                    const radius = diameter / 2;
+
+                    circle.style.width = circle.style.height = `${diameter}px`;
+                    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+                    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+                    circle.classList.add('ripple');
+
+                    const ripple = button.getElementsByClassName('ripple')[0];
+                    if (ripple) ripple.remove();
+
+                    button.appendChild(circle);
+                },
+                
+                createConfetti() {
+                    const colors = ['#FFB84D', '#10B981', '#3B82F6', '#EF4444', '#9333EA'];
+                    const confettiCount = 50;
+                    
+                    for (let i = 0; i < confettiCount; i++) {
+                        const confetti = document.createElement('div');
+                        confetti.style.cssText = `
+                            position: fixed;
+                            left: ${Math.random() * 100}%;
+                            top: -10px;
+                            width: 10px;
+                            height: 10px;
+                            background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+                            border-radius: 50%;
+                            pointer-events: none;
+                            z-index: 10000;
+                            animation: confetti ${2 + Math.random() * 2}s ease-out forwards;
+                            animation-delay: ${Math.random() * 0.5}s;
+                        `;
+                        
+                        document.body.appendChild(confetti);
+                        setTimeout(() => confetti.remove(), 4000);
+                    }
+                },
+                
+                animateNumber(element, start, end, duration = 1000) {
+                    const range = end - start;
+                    const increment = range / (duration / 16);
+                    let current = start;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                            current = end;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current);
+                    }, 16);
+                },
+                
+                updateButtonText(text) {
+                    if (HoldHub.$.submitBtn) {
+                        const btnText = HoldHub.$.submitBtn.querySelector('.btn-text');
+                        if (btnText) btnText.textContent = text;
+                    }
+                }
+            },
+
+            // ============================================
+            // DATA MANAGEMENT
+            // ============================================
+            data: {
+                prefix: 'holdhub_',
+                
+                save(data) {
+                    try {
+                        const dataToSave = {
+                            ...data,
+                            signupDate: new Date().toISOString(),
+                            lastUpdated: new Date().toISOString()
+                        };
+                        localStorage.setItem(this.prefix + 'customer_data', JSON.stringify(dataToSave));
+                        localStorage.setItem(this.prefix + 'used', 'true');
+                        return true;
+                    } catch (e) {
+                        console.error('Failed to save data:', e);
+                        if (e.name === 'QuotaExceededError') {
+                            HoldHub.ui.showToast('Storage full. Data saved in memory only.', 'error');
+                        }
+                        return false;
+                    }
+                },
+                
+                load() {
+                    try {
+                        const data = localStorage.getItem(this.prefix + 'customer_data');
+                        return data ? JSON.parse(data) : null;
+                    } catch (e) {
+                        console.error('Failed to load data:', e);
+                        return null;
+                    }
+                },
+                
+                getCustomerCode() {
+                    const data = this.load();
+                    return data ? data.customerCode : null;
+                },
+                
+                isReturningCustomer() {
+                    return localStorage.getItem(this.prefix + 'used') === 'true';
+                },
+                
+                clear() {
+                    try {
+                        localStorage.removeItem(this.prefix + 'customer_data');
+                        localStorage.removeItem(this.prefix + 'used');
+                        localStorage.removeItem(this.prefix + 'customer_code');
+                    } catch (e) {
+                        console.error('Failed to clear data:', e);
+                    }
+                }
+            },
+
+            // ============================================
+            // VALIDATION SYSTEM
+            // ============================================
+            validation: {
+                email(email) {
+                    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!email) return { valid: false, message: 'Hmm, that email looks suspicious 🤔' };
+                    if (!regex.test(email)) {
+                        if (!email.includes('@')) {
+                            return { valid: false, message: 'Email must include @ symbol' };
+                        }
+                        if (!email.includes('.')) {
+                            return { valid: false, message: 'Email must include domain (e.g., gmail.com)' };
+                        }
+                        return { valid: false, message: 'Please enter a valid email address' };
+                    }
+                    return { valid: true };
+                },
+                
+                phone(phone) {
+                    const digits = phone.replace(/\D/g, '');
+                    if (!phone) return { valid: false, message: 'Phone number playing hard to get? 📱' };
+                    if (digits.length !== 10) {
+                        return { valid: false, message: 'Phone must be 10 digits' };
+                    }
+                    return { valid: true };
+                },
+                
+                name(name) {
+                    if (!name) return { valid: false, message: 'Please enter your full name' };
+                    if (name.length < 2) {
+                        return { valid: false, message: 'Name must be at least 2 characters' };
+                    }
+                    const regex = /^[a-zA-Z\s'-]+$/;
+                    if (!regex.test(name)) {
+                        return { valid: false, message: 'Name can only contain letters, spaces, hyphens, and apostrophes' };
+                    }
+                    return { valid: true };
+                },
+                
+                street(street) {
+                    if (!street) return { valid: false, message: 'Please enter your street address' };
+                    if (street.length < 5) {
+                        return { valid: false, message: 'Please enter complete street address' };
+                    }
+                    const hasNumber = /\d/.test(street);
+                    if (!hasNumber) {
+                        return { valid: false, message: 'Street address must include a number' };
+                    }
+                    return { valid: true };
+                },
+                
+                zip(zip) {
+                    if (!zip) return { valid: false, message: 'Zip code is required' };
+                    if (zip.length !== 5) {
+                        return { valid: false, message: 'Zip code must be 5 digits' };
+                    }
+                    if (zip !== '11221') {
+                        return { valid: false, message: 'That zip code is outside our zone (for now!) 🗺️' };
+                    }
+                    return { valid: true };
+                }
+            },
+            
+            // ============================================
+            // BODEGA DATA
+            // ============================================
+            bodegas: {
+                ahmeds: {
+                    name: "Ahmed's Deli & Grocery",
+                    address: "456 Bushwick Ave, Brooklyn, NY 11221",
+                    description: "The original! 🏆 Ahmed has the best smile"
+                },
+                marias: {
+                    name: "Maria's Corner Store",
+                    address: "789 Wilson Ave, Brooklyn, NY 11221",
+                    description: "Family-owned for 20 years ❤️"
+                },
+                best: {
+                    name: "Best Grocery & Deli",
+                    address: "321 Knickerbocker Ave, Brooklyn, NY 11221",
+                    description: "Never closes! Literally. Never. 24/7 🌙"
+                },
+                sunrise: {
+                    name: "Sunrise Deli",
+                    address: "567 Broadway, Brooklyn, NY 11221",
+                    description: "Fresh coffee every morning ☕"
+                },
+                quickstop: {
+                    name: "Quick Stop Bodega",
+                    address: "234 Myrtle Ave, Brooklyn, NY 11221",
+                    description: "Speedy service, friendly faces 😊"
+                }
+            },
+            
+            // ============================================
+            // INITIALIZATION
+            // ============================================
+            init() {
+                // Track page view
+                HoldHub.state.startTime = Date.now();
+                HoldHub.analytics.track('page_view');
+                
+                // Cache DOM elements for performance
+                this.cacheDOM();
+                
+                // Check if returning customer
+                HoldHub.state.isReturning = HoldHub.data.isReturningCustomer();
+                
+                // Initialize UI
+                this.initUI();
+                
+                // Setup event listeners with event delegation where possible
+                this.setupEvents();
+                
+                // Easter eggs
+                this.setupEasterEggs();
+                
+                if (HoldHub.env.debugMode) {
+                    console.log(`HoldHub v${HoldHub.version.string} initialized`);
+                }
+            },
+            
+            cacheDOM() {
+                HoldHub.$ = {
+                    container: document.getElementById('main-content'),
+                    form: document.getElementById('signupForm'),
+                    submitBtn: document.getElementById('submitBtn'),
+                    nameInput: document.getElementById('name'),
+                    emailInput: document.getElementById('email'),
+                    phoneInput: document.getElementById('phone'),
+                    streetInput: document.getElementById('street'),
+                    zipInput: document.getElementById('zip'),
+                    termsCheckbox: document.getElementById('terms'),
+                    bodegasSection: document.getElementById('bodegasSection'),
+                    successScreen: document.getElementById('successScreen'),
+                    logo: document.getElementById('logo')
+                };
+            },
+            
+            initUI() {
+                // Update badge for returning customers
+                if (HoldHub.state.isReturning) {
+                    const badge = document.getElementById('badge');
+                    if (badge) {
+                        badge.className = 'badge returning';
+                        badge.textContent = 'Welcome Back! $5 per delivery';
+                    }
+                }
+                
+                // Animate social proof counter
+                this.animateSignupCount();
+            },
+            
+            animateSignupCount() {
+                const countEl = document.getElementById('signupCount');
+                if (countEl) {
+                    const target = parseInt(countEl.textContent) || 127;
+                    let current = Math.max(0, target - 20);
+                    const increment = (target - current) / 30;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        countEl.textContent = Math.floor(current);
+                    }, 50);
+                }
+            },
+            
+            setupEasterEggs() {
+                // Logo click easter egg
+                let logoClicks = 0;
+                if (HoldHub.$.logo) {
+                    HoldHub.$.logo.addEventListener('click', () => {
+                        logoClicks++;
+                        if (logoClicks === 5) {
+                            HoldHub.ui.createConfetti();
+                            HoldHub.ui.showToast('🎉 You found the easter egg!', 'success', 3000);
+                            logoClicks = 0;
+                        }
+                    });
+                }
+                
+                // Konami code
+                const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+                let konamiIndex = 0;
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === konamiCode[konamiIndex]) {
+                        konamiIndex++;
+                        if (konamiIndex === konamiCode.length) {
+                            HoldHub.ui.createConfetti();
+                            HoldHub.ui.showToast('🎮 Konami code activated!', 'success', 3000);
+                            konamiIndex = 0;
+                        }
+            } else {
+                        konamiIndex = 0;
+                    }
+                });
+            },
+            
+            setupEvents() {
+                // Form field validation with analytics
+                this.setupFormValidation();
+                
+                // Bodega selection
+                this.setupBodegaSelection();
+                
+                // Form submission
+                this.setupFormSubmission();
+            },
+            
+            setupFormValidation() {
+                // Name validation with auto-capitalize
+                if (HoldHub.$.nameInput) {
+                    HoldHub.$.nameInput.addEventListener('input', function() {
+                        const words = this.value.split(' ');
+                        const capitalized = words.map(word => {
+                            if (word.length === 0) return word;
+                            return word[0].toUpperCase() + word.slice(1).toLowerCase();
+                        }).join(' ');
+                        if (capitalized !== this.value) {
+                            this.value = capitalized;
+                        }
+                        
+                        // Track field completion
+                        if (this.value.length > 0 && !HoldHub.state.fieldStartTimes.name) {
+                            HoldHub.state.fieldStartTimes.name = Date.now();
+                            HoldHub.analytics.track('field_complete', { field: 'name' });
+                        }
+                    });
+                    
+                    const debouncedName = HoldHub.utils.debounce(() => {
+                        HoldHub.validateField('name', HoldHub.validation.name, HoldHub.$.nameInput);
+                        HoldHub.updateSubmitButton();
+                    }, HoldHub.config.debounceDelay);
+                    
+                    HoldHub.$.nameInput.addEventListener('input', debouncedName);
+                    HoldHub.$.nameInput.addEventListener('blur', () => {
+                        HoldHub.validateField('name', HoldHub.validation.name, HoldHub.$.nameInput);
+                    });
+                }
+                
+                // Email validation
+                if (HoldHub.$.emailInput) {
+                    const debouncedEmail = HoldHub.utils.debounce(() => {
+                        HoldHub.validateField('email', HoldHub.validation.email, HoldHub.$.emailInput);
+                        HoldHub.updateSubmitButton();
+                    }, HoldHub.config.validationDebounce);
+                    
+                    HoldHub.$.emailInput.addEventListener('input', debouncedEmail);
+                    HoldHub.$.emailInput.addEventListener('blur', () => {
+                        HoldHub.validateField('email', HoldHub.validation.email, HoldHub.$.emailInput);
+                    });
+                    
+                    HoldHub.$.emailInput.addEventListener('focus', () => {
+                        if (!HoldHub.state.fieldStartTimes.email) {
+                            HoldHub.analytics.track('form_start');
+                        }
+                    });
+                }
+                
+                // Phone formatting and validation
+                if (HoldHub.$.phoneInput) {
+                    HoldHub.$.phoneInput.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 0) {
+                            if (value.length <= 3) {
+                                value = `(${value}`;
+                            } else if (value.length <= 6) {
+                                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+            } else {
+                                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+                            }
+                        }
+                        e.target.value = value;
+                        
+                        const debouncedPhone = HoldHub.utils.debounce(() => {
+                            HoldHub.validateField('phone', HoldHub.validation.phone, HoldHub.$.phoneInput);
+                            HoldHub.updateSubmitButton();
+                        }, HoldHub.config.debounceDelay);
+                        debouncedPhone();
+                    });
+                    
+                    HoldHub.$.phoneInput.addEventListener('blur', () => {
+                        HoldHub.validateField('phone', HoldHub.validation.phone, HoldHub.$.phoneInput);
+                    });
+                }
+                
+                // Street validation
+                if (HoldHub.$.streetInput) {
+                    const debouncedStreet = HoldHub.utils.debounce(() => {
+                        HoldHub.validateField('street', HoldHub.validation.street, HoldHub.$.streetInput);
+                        HoldHub.updateSubmitButton();
+                    }, HoldHub.config.debounceDelay);
+                    
+                    HoldHub.$.streetInput.addEventListener('input', debouncedStreet);
+                    HoldHub.$.streetInput.addEventListener('blur', () => {
+                        HoldHub.validateField('street', HoldHub.validation.street, HoldHub.$.streetInput);
+                    });
+                }
+                
+                // Zip validation with analytics
+                if (HoldHub.$.zipInput) {
+                    const debouncedZip = HoldHub.utils.debounce(() => {
+                        const zip = HoldHub.$.zipInput.value.trim();
+                        HoldHub.analytics.track('zip_entered', { zip });
+                        
+                        if (zip.length === 5) {
+                            const result = HoldHub.validation.zip(zip);
+                            if (result.valid) {
+                                HoldHub.analytics.track('zip_valid');
+                                HoldHub.handleZipSuccess();
+                            } else {
+                                HoldHub.analytics.track('zip_invalid', { zip });
+                                HoldHub.handleZipError(result.message);
+                            }
+                        }
+                    }, HoldHub.config.debounceDelay);
+                    
+                    HoldHub.$.zipInput.addEventListener('input', debouncedZip);
+                }
+            },
+            
+            validateField(fieldId, validator, inputElement) {
+                const value = inputElement.value.trim();
+                const result = validator(value);
+                const errorElement = document.getElementById(fieldId + 'Error');
+                const validationIcon = inputElement.parentElement?.querySelector('.validation-icon');
+                
+                if (value && !result.valid) {
+                    inputElement.classList.add('error');
+                    inputElement.classList.remove('valid');
+                    inputElement.setAttribute('aria-invalid', 'true');
+                    if (validationIcon) {
+                        validationIcon.textContent = '✗';
+                        validationIcon.style.animation = 'slideInRight 0.3s ease';
+                    }
+                    if (errorElement) {
+                        errorElement.textContent = result.message;
+                        errorElement.classList.add('show');
+                    }
+                    HoldHub.analytics.trackError(fieldId, result.message);
+                    return false;
+                } else if (value && result.valid) {
+                    inputElement.classList.remove('error');
+                    inputElement.classList.add('valid');
+                    inputElement.setAttribute('aria-invalid', 'false');
+                    if (validationIcon) {
+                        validationIcon.textContent = '✓';
+                        validationIcon.style.animation = 'slideInRight 0.3s ease';
+                    }
+                    if (errorElement) {
+                        errorElement.classList.remove('show');
+                    }
+                    return true;
+                } else {
+                    inputElement.classList.remove('error', 'valid');
+                    inputElement.removeAttribute('aria-invalid');
+                    if (validationIcon) validationIcon.textContent = '';
+                    if (errorElement) errorElement.classList.remove('show');
+                    return false;
+                }
+            },
+            
+            handleZipSuccess() {
+                const zipFeedback = document.getElementById('zipFeedback');
+                const zipError = document.getElementById('zipError');
+                
+                if (zipFeedback) {
+                    zipFeedback.className = 'zip-feedback success';
+                    zipFeedback.textContent = '✓ Perfect! We serve Bushwick 11221';
+                    zipFeedback.style.animation = 'slideDownBounce 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                }
+                
+                HoldHub.$.zipInput.classList.remove('error');
+                HoldHub.$.zipInput.classList.add('valid');
+                HoldHub.$.zipInput.setAttribute('aria-invalid', 'false');
+                if (zipError) zipError.classList.remove('show');
+                
+                // Animate bodegas in
+                if (HoldHub.$.bodegasSection) {
+                    HoldHub.$.bodegasSection.classList.add('show');
+                    HoldHub.analytics.track('bodega_viewed');
+                    
+                    const cards = HoldHub.$.bodegasSection.querySelectorAll('.bodega-card');
+                    cards.forEach((card, index) => {
+                        card.style.animationDelay = `${0.1 * index}s`;
+                        card.style.animation = 'fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both';
+                    });
+                }
+                
+                HoldHub.updateSubmitButton();
+            },
+            
+            handleZipError(message) {
+                const zipFeedback = document.getElementById('zipFeedback');
+                const zipError = document.getElementById('zipError');
+                
+                if (zipFeedback) {
+                    zipFeedback.className = 'zip-feedback error';
+                    zipFeedback.textContent = '✗ ' + message;
+                    zipFeedback.style.animation = 'shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97)';
+                }
+                
+                HoldHub.$.zipInput.classList.add('error');
+                HoldHub.$.zipInput.classList.remove('valid');
+                HoldHub.$.zipInput.setAttribute('aria-invalid', 'true');
+                if (zipError) {
+                    zipError.textContent = message;
+                    zipError.classList.add('show');
+                }
+                
+                if (HoldHub.$.bodegasSection) {
+                    HoldHub.$.bodegasSection.classList.remove('show');
+                }
+                HoldHub.state.selectedBodega = null;
+                HoldHub.updateSubmitButton();
+            },
+            
+            setupBodegaSelection() {
+                if (!HoldHub.$.bodegasSection) return;
+                
+                // Use event delegation for performance
+                HoldHub.$.bodegasSection.addEventListener('click', (e) => {
+                    const card = e.target.closest('.bodega-card');
+                    if (!card) return;
+                    
+                    HoldHub.selectBodega(card, e);
+                });
+                
+                // Keyboard navigation
+                HoldHub.$.bodegasSection.addEventListener('keydown', (e) => {
+                    const card = e.target.closest('.bodega-card');
+                    if (!card) return;
+                    
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        HoldHub.selectBodega(card, e);
+                    }
+                });
+                
+                // Make cards keyboard accessible
+                HoldHub.$.bodegasSection.querySelectorAll('.bodega-card').forEach(card => {
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('role', 'button');
+                    const name = card.querySelector('.bodega-name')?.textContent;
+                    if (name) {
+                        card.setAttribute('aria-label', `Select ${name}`);
+                    }
+                });
+            },
+            
+            selectBodega(card, event) {
+                // Create ripple effect
+                if (event && event.type === 'click') {
+                    HoldHub.ui.createRipple(event);
+                }
+                
+                // Remove previous selection
+                HoldHub.$.bodegasSection.querySelectorAll('.bodega-card').forEach(c => {
+                    if (c !== card && c.classList.contains('selected')) {
+                        c.classList.remove('selected');
+                    }
+                });
+                
+                // Add selection
+                card.classList.add('selected');
+                HoldHub.state.selectedBodega = card.dataset.bodega;
+                
+                // Analytics
+                HoldHub.analytics.track('bodega_clicked', { bodega: HoldHub.state.selectedBodega });
+                HoldHub.analytics.track('bodega_selected', { bodega: HoldHub.state.selectedBodega });
+                
+                // Show compliment
+                const compliment = HoldHub.utils.getCompliment();
+                HoldHub.ui.showToast(compliment, 'success', 2000);
+                
+                // Show personality description
+                const description = card.dataset.description;
+                if (description) {
+                    setTimeout(() => {
+                        HoldHub.ui.showToast(description, 'info', 3000);
+                    }, 2500);
+                }
+                
+                HoldHub.updateSubmitButton();
+                
+                // Scroll to submit button
+                HoldHub.utils.raf(() => {
+                    HoldHub.$.submitBtn?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            },
+            
+            updateSubmitButton() {
+                if (!HoldHub.$.form || !HoldHub.$.submitBtn) return;
+                
+                const termsChecked = HoldHub.$.termsCheckbox?.checked;
+                const isValid = HoldHub.$.form.checkValidity() && 
+                               HoldHub.$.zipInput?.value === '11221' && 
+                               HoldHub.state.selectedBodega !== null && 
+                               termsChecked;
+                
+                HoldHub.$.submitBtn.disabled = !isValid;
+                
+                // Show terms error if needed
+                const termsError = document.getElementById('termsError');
+                if (termsError) {
+                    if (!termsChecked && HoldHub.$.form.checkValidity()) {
+                        termsError.classList.add('show');
+                    } else {
+                        termsError.classList.remove('show');
+                    }
+                }
+            },
+            
+            setupFormSubmission() {
+                if (!HoldHub.$.form) return;
+                
+                HoldHub.$.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+                    // Validate all fields
+                    const nameValid = HoldHub.validateField('name', HoldHub.validation.name, HoldHub.$.nameInput);
+                    const emailValid = HoldHub.validateField('email', HoldHub.validation.email, HoldHub.$.emailInput);
+                    const phoneValid = HoldHub.validateField('phone', HoldHub.validation.phone, HoldHub.$.phoneInput);
+                    const streetValid = HoldHub.validateField('street', HoldHub.validation.street, HoldHub.$.streetInput);
+                    const zipValid = HoldHub.$.zipInput.value === '11221';
+                    
+                    // Validate terms
+                    if (!HoldHub.$.termsCheckbox.checked) {
+                        document.getElementById('termsError')?.classList.add('show');
+                        HoldHub.$.termsCheckbox.focus();
+                        HoldHub.$.termsCheckbox.setAttribute('aria-invalid', 'true');
+                        HoldHub.ui.showToast('Please agree to the terms and conditions', 'error');
+                        HoldHub.analytics.track('form_submit', { status: 'failed', reason: 'terms_not_checked' });
+                        return;
+                    }
+                    
+                    // Validate bodega
+                    if (!HoldHub.state.selectedBodega) {
+                        HoldHub.ui.showToast('Please select a pickup location', 'error');
+                        HoldHub.$.bodegasSection?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        HoldHub.analytics.track('form_submit', { status: 'failed', reason: 'no_bodega' });
+                        return;
+                    }
+                    
+                    // Check all fields valid
+                    if (!nameValid || !emailValid || !phoneValid || !streetValid || !zipValid) {
+                        const invalidFields = [
+                            !nameValid && HoldHub.$.nameInput,
+                            !emailValid && HoldHub.$.emailInput,
+                            !phoneValid && HoldHub.$.phoneInput,
+                            !streetValid && HoldHub.$.streetInput,
+                            !zipValid && HoldHub.$.zipInput
+                        ].filter(Boolean);
+                        
+                        if (invalidFields.length > 0) {
+                            invalidFields[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            invalidFields[0].focus();
+                            HoldHub.ui.showToast('Please fix the errors in the form', 'error');
+                            HoldHub.analytics.track('form_submit', { status: 'failed', reason: 'validation_errors' });
+                        }
+                        return;
+                    }
+                    
+                    // Track submission
+                    HoldHub.analytics.track('form_submit', { status: 'success' });
+                    
+                    // Show loading
+                    HoldHub.$.submitBtn.disabled = true;
+                    HoldHub.$.submitBtn.classList.add('loading');
+                    const loadingMsg = HoldHub.utils.getLoadingMessage();
+                    HoldHub.ui.updateButtonText(loadingMsg);
+                    HoldHub.ui.showLoading(loadingMsg);
+                    
+                    // Process submission
+                    setTimeout(() => {
+                        HoldHub.processSubmission();
+                    }, 800);
+                });
+                
+                // Terms checkbox
+                if (HoldHub.$.termsCheckbox) {
+                    HoldHub.$.termsCheckbox.addEventListener('change', function() {
+                        HoldHub.updateSubmitButton();
+                        if (this.checked) {
+                            document.getElementById('termsError')?.classList.remove('show');
+                            this.removeAttribute('aria-invalid');
+                        }
+                    });
+                }
+            },
+            
+            processSubmission() {
+                // Get or generate customer code
+                let customerCode = HoldHub.data.getCustomerCode();
+                const isNewCustomer = !customerCode;
+                
+                if (isNewCustomer) {
+                    customerCode = HoldHub.utils.generateUniqueCustomerCode();
+                }
+                
+                HoldHub.state.customerCode = customerCode;
+                
+                // Prepare form data
+            const formData = {
+                    customerCode,
+                    name: HoldHub.$.nameInput.value.trim(),
+                    email: HoldHub.$.emailInput.value.trim(),
+                    phone: HoldHub.$.phoneInput.value.trim(),
+                    address: {
+                        street: HoldHub.$.streetInput.value.trim(),
+                        apartment: document.getElementById('apartment')?.value.trim() || '',
+                        zipcode: HoldHub.$.zipInput.value.trim()
+                    },
+                    bodega: {
+                        id: HoldHub.state.selectedBodega,
+                        name: HoldHub.bodegas[HoldHub.state.selectedBodega].name,
+                        fullAddress: HoldHub.bodegas[HoldHub.state.selectedBodega].address
+                    },
+                    isNewCustomer,
+                    packageCount: 0,
+                    totalSpent: 0
+                };
+                
+                // Log for debugging
+                if (HoldHub.env.debugMode) {
+                    console.group('🎉 HoldHub Signup');
+                    console.log('Customer Code:', customerCode);
+                    console.log('Bodega:', HoldHub.bodegas[HoldHub.state.selectedBodega]);
+                    console.log('Data:', formData);
+                    console.groupEnd();
+                }
+                
+                // Save data
+                const saved = HoldHub.data.save(formData);
+                if (saved) {
+                    HoldHub.ui.showToast('✓ Data saved securely', 'success', 2000);
+                }
+                
+                // Track conversion
+                HoldHub.analytics.trackConversion();
+                HoldHub.analytics.track('code_generated', { customerCode });
+                
+                // Hide loading
+                HoldHub.ui.hideLoading();
+                
+                // Animate form out
+                const formSection = document.getElementById('formSection');
+                if (formSection) {
+                    formSection.style.animation = 'fadeInUp 0.3s reverse';
+                    setTimeout(() => {
+                        formSection.style.display = 'none';
+                        document.getElementById('badge')?.style.setProperty('display', 'none');
+                        document.querySelector('.footer')?.style.setProperty('display', 'none');
+                        document.querySelector('.benefits-section')?.style.setProperty('display', 'none');
+                        document.querySelector('.trust-signals')?.style.setProperty('display', 'none');
+                        document.querySelector('.social-proof')?.style.setProperty('display', 'none');
+                        
+                        // Show success screen
+                        HoldHub.showSuccessScreen(formData, customerCode, isNewCustomer);
+                    }, 300);
+                }
+            },
+            
+            showSuccessScreen(formData, customerCode, isNewCustomer) {
+                // Confetti for new customers
+                if (isNewCustomer) {
+                    HoldHub.ui.createConfetti();
+                }
+                
+                // Show success screen
+                if (HoldHub.$.successScreen) {
+                    HoldHub.$.successScreen.style.display = 'block';
+                    HoldHub.$.successScreen.style.opacity = '0';
+                    HoldHub.$.successScreen.style.transform = 'scale(0.9)';
+                    HoldHub.$.successScreen.classList.add('show');
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        HoldHub.$.successScreen.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                        HoldHub.$.successScreen.style.opacity = '1';
+                        HoldHub.$.successScreen.style.transform = 'scale(1)';
+                    }, 10);
+                }
+                
+                // Update title with time-based greeting
+                const successTitle = document.getElementById('successTitle');
+                if (successTitle) {
+                    const greeting = HoldHub.utils.getTimeGreeting();
+                    if (isNewCustomer) {
+                        successTitle.textContent = `${greeting.text} Welcome to HoldHub!`;
+                    } else {
+                        successTitle.textContent = `Welcome Back to HoldHub! ${greeting.emoji}`;
+                    }
+                }
+                
+                // Animate customer code
+                const codeDisplay = document.getElementById('customerCodeDisplay');
+                if (codeDisplay) {
+                    const codeNumber = parseInt(customerCode.split('-')[1]);
+                    codeDisplay.textContent = 'HH-000000';
+                    
+                    setTimeout(() => {
+                        let current = 0;
+                        const increment = codeNumber / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= codeNumber) {
+                                current = codeNumber;
+                                clearInterval(timer);
+                            }
+                            codeDisplay.textContent = 'HH-' + String(Math.floor(current)).padStart(6, '0');
+                        }, 20);
+                    }, 500);
+                }
+                
+                // Format delivery address
+                const bodega = HoldHub.bodegas[HoldHub.state.selectedBodega];
+                const deliveryAddress = `${bodega.name}\nATTN: ${customerCode} - ${formData.name}\n${bodega.address}`;
+                
+                // Display address
+                const addressBox = document.getElementById('deliveryAddress');
+                if (addressBox) {
+                    addressBox.innerHTML = deliveryAddress.split('\n').map(line => 
+                        line ? `<div>${line}</div>` : '<br>'
+                    ).join('');
+                }
+                
+                // Copy address button
+                const copyBtn = document.getElementById('copyBtn');
+                if (copyBtn) {
+                    copyBtn.onclick = function() {
+                        navigator.clipboard.writeText(deliveryAddress).then(() => {
+                            this.textContent = '✓ Copied!';
+                            this.classList.add('copied');
+                            HoldHub.analytics.track('address_copied');
+                            setTimeout(() => {
+                                this.textContent = 'Copy Address';
+                                this.classList.remove('copied');
+                            }, 2000);
+                        }).catch(() => {
+                            // Fallback
+                            const textArea = document.createElement('textarea');
+                            textArea.value = deliveryAddress;
+                            textArea.style.cssText = 'position:fixed;opacity:0;';
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            try {
+                                document.execCommand('copy');
+                                this.textContent = '✓ Copied!';
+                                this.classList.add('copied');
+                                HoldHub.analytics.track('address_copied');
+                                setTimeout(() => {
+                                    this.textContent = 'Copy Address';
+                                    this.classList.remove('copied');
+                                }, 2000);
+                            } catch (err) {
+                                HoldHub.ui.showToast('Failed to copy. Please select and copy manually.', 'error');
+                            }
+                            document.body.removeChild(textArea);
+                        });
+                    };
+                }
+                
+                // Copy code button
+                const copyCodeBtn = document.getElementById('copyCodeBtn');
+                if (copyCodeBtn) {
+                    copyCodeBtn.onclick = function() {
+                        navigator.clipboard.writeText(customerCode).then(() => {
+                            this.textContent = '✓ Copied!';
+                            this.classList.add('copied');
+                            setTimeout(() => {
+                                this.textContent = 'Copy Code';
+                                this.classList.remove('copied');
+                            }, 2000);
+                        }).catch(() => {
+                            HoldHub.ui.showToast('Failed to copy. Please copy manually: ' + customerCode, 'error');
+                        });
+                    };
+                }
+            }
+        };
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => HoldHub.init());
+        } else {
+            HoldHub.init();
+        }
+        
+        // Expose for testing in development
+        if (HoldHub.env.isDevelopment) {
+            window.HoldHub = HoldHub;
+        }
+        
+        // ============================================
+        // PWA FUNCTIONALITY
+        // ============================================
+        
+        // Hide loading screen when app is ready
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const appLoading = document.getElementById('appLoading');
+                if (appLoading) {
+                    appLoading.classList.add('hidden');
+                    setTimeout(() => {
+                        appLoading.style.display = 'none';
+                    }, 500);
+                }
+            }, 800);
+        });
+        
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            let registration;
+            
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        registration = reg;
+                        console.log('✓ Service Worker registered!', reg.scope);
+                        
+                        // Check for updates
+                        reg.addEventListener('updatefound', () => {
+                            const newWorker = reg.installing;
+                            if (newWorker) {
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        // New service worker available
+                                        showUpdateNotification();
+                                    }
+                                });
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+            
+            // Listen for controller change (update activated)
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
+            });
+        }
+        
+        // Install Prompt
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Show install button
+            if (installButton) {
+                installButton.classList.add('show');
+            }
+        });
+        
+        // Handle install button click
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (!deferredPrompt) {
+                    // Show install instructions for iOS
+                    const instructions = document.getElementById('installInstructions');
+                    if (instructions) {
+                        instructions.style.display = 'block';
+                        instructions.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+                
+                // Show the install prompt
+                deferredPrompt.prompt();
+                
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    HoldHub.analytics.track('pwa_install', { outcome: 'accepted' });
+                } else {
+                    console.log('User dismissed the install prompt');
+                    HoldHub.analytics.track('pwa_install', { outcome: 'dismissed' });
+                }
+                
+                // Hide install button
+                if (installButton) {
+                    installButton.classList.remove('show');
+                }
+                
+                // Clear the deferredPrompt
+                deferredPrompt = null;
+            });
+        }
+        
+        // Hide install button after installation
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            if (installButton) {
+                installButton.classList.remove('show');
+            }
+            deferredPrompt = null;
+            HoldHub.analytics.track('pwa_installed');
+            HoldHub.ui.showToast('HoldHub installed! 🎉', 'success', 3000);
+        });
+        
+        // Update Notification
+        function showUpdateNotification() {
+            const updateNotification = document.getElementById('updateNotification');
+            if (updateNotification) {
+                updateNotification.classList.add('show');
+            }
+        }
+        
+        // Share Functionality
+        const shareButton = document.getElementById('shareButton');
+        if (shareButton) {
+            shareButton.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'HoldHub - Package Delivery',
+                    text: 'I just signed up for HoldHub! Never miss a delivery again. 📦',
+                    url: window.location.href
+                };
+                
+                try {
+                    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                        await navigator.share(shareData);
+                        HoldHub.analytics.track('share', { method: 'native' });
+                        HoldHub.ui.showToast('Thanks for sharing! 🎉', 'success', 2000);
+                    } else {
+                        // Fallback: copy to clipboard
+                        await navigator.clipboard.writeText(shareData.url);
+                        HoldHub.analytics.track('share', { method: 'clipboard' });
+                        HoldHub.ui.showToast('Link copied to clipboard! 📋', 'success', 2000);
+                    }
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        console.error('Error sharing:', err);
+                        // Fallback: copy to clipboard
+                        try {
+                            await navigator.clipboard.writeText(shareData.url);
+                            HoldHub.ui.showToast('Link copied to clipboard! 📋', 'success', 2000);
+                        } catch (clipboardErr) {
+                            HoldHub.ui.showToast('Sharing not available', 'error');
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Show share button on success screen if Web Share API is available
+        if (navigator.share) {
+            const shareBtn = document.getElementById('shareButton');
+            if (shareBtn) {
+                shareBtn.style.display = 'inline-flex';
+            }
+        }
+        
+        // Push Notifications Prep (Future)
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        HoldHub.analytics.track('notification_permission', { granted: true });
+                        HoldHub.ui.showToast('You\'ll get notified when packages arrive! 🔔', 'success', 3000);
+                    } else {
+                        HoldHub.analytics.track('notification_permission', { granted: false });
+                    }
+                });
+            }
+        }
+        
+        // Request notification permission after successful signup (future)
+        // This can be called from showSuccessScreen after user signs up
+        
+        // Detect if app is running in standalone mode
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone ||
+                   document.referrer.includes('android-app://');
+        }
+        
+        // Track if app is installed
+        if (isStandalone()) {
+            HoldHub.analytics.track('pwa_launch', { mode: 'standalone' });
+            // Hide install button if already installed
+            if (installButton) {
+                installButton.classList.remove('show');
+            }
+        }
+        
+        // Offline detection
+        window.addEventListener('online', () => {
+            HoldHub.ui.showToast('Back online! ✓', 'success', 2000);
+        });
+        
+        window.addEventListener('offline', () => {
+            HoldHub.ui.showToast('You\'re offline. Data will sync when back online.', 'info', 3000);
+        });
+    </script>
+</body>
+</html>
