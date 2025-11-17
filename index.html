@@ -2874,6 +2874,43 @@
                     HoldHub.ui.showToast('✓ Data saved securely', 'success', 2000);
                 }
                 
+                // Prepare data for Google Sheets
+                const sheetData = {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    address: formData.address.street,
+                    apartment: formData.address.apartment || '',
+                    zipcode: formData.address.zipcode,
+                    bodegaName: formData.bodega.name,
+                    bodegaAddress: formData.bodega.fullAddress,
+                    customerCode: customerCode,
+                    isReturning: !isNewCustomer,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Send to Google Sheets
+                const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzWOp-p07GbpilJgY6ruuap9muwhidhZMhw72Z4u9nDXZ4KFj9x0hj583QP-fZPZzwO/exec';
+                
+                fetch(GOOGLE_SHEETS_WEBHOOK, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sheetData)
+                })
+                .then(() => {
+                    console.log('✓ Data sent to Google Sheets!');
+                    if (HoldHub.env.debugMode) {
+                        HoldHub.ui.showToast('✓ Data saved to Google Sheets!', 'success', 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving to Sheets:', error);
+                    // Still continue - localStorage backup is already saved
+                });
+                
                 // Track conversion
                 HoldHub.analytics.trackConversion();
                 HoldHub.analytics.track('code_generated', { customerCode });
