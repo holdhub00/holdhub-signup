@@ -2890,7 +2890,11 @@
                 };
                 
                 // Send to Google Sheets
-                const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzWOp-p07GbpilJgY6ruuap9muwhidhZMhw72Z4u9nDXZ4KFj9x0hj583QP-fZPZzwO/exec';
+                const GOOGLE_SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzB9U1ux7WrLVvJOqSZA38nAGgDRBfOLi80ZZXipqm93aL0d51F6uyjHlWF7ICJ62_u/exec';
+                
+                console.log('📊 Sending to Google Sheets...');
+                console.log('Webhook:', GOOGLE_SHEETS_WEBHOOK);
+                console.log('Data:', sheetData);
                 
                 fetch(GOOGLE_SHEETS_WEBHOOK, {
                     method: 'POST',
@@ -2901,13 +2905,13 @@
                     body: JSON.stringify(sheetData)
                 })
                 .then(() => {
-                    console.log('✓ Data sent to Google Sheets!');
+                    console.log('✓ Data saved to Google Sheets!');
                     if (HoldHub.env.debugMode) {
                         HoldHub.ui.showToast('✓ Data saved to Google Sheets!', 'success', 2000);
                     }
                 })
                 .catch(error => {
-                    console.error('Error saving to Sheets:', error);
+                    console.error('❌ Error saving to Sheets:', error);
                     // Still continue - localStorage backup is already saved
                 });
                 
